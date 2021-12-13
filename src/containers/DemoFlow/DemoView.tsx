@@ -1,8 +1,15 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
+import styled from 'styled-components/native';
 
 export const DemoView: React.FC = () => (
   <View>
-    <Text>DemoView</Text>
+    <DemoText>DemoView</DemoText>
   </View>
 );
+
+const DemoText = styled.Text`
+  color: red;
+  font-size: 20px;
+  font-family: ${({ theme }) => theme.fonts.Poppins.ExtraBold};
+`;

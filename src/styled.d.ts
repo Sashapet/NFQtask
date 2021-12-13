@@ -13,14 +13,14 @@ export interface AppColors {
 }
 export interface AppFonts {
   Poppins: {
-    PoppinsBold: string;
-    PoppinsExtraBold: string;
-    PoppinsExtraLight: string;
-    PoppinsLight: string;
-    PoppinsMedium: string;
-    PoppinsRegular: string;
-    PoppinsSemiBold: string;
-    PoppinsThin: string;
+    Bold: string;
+    ExtraBold: string;
+    ExtraLight: string;
+    Light: string;
+    Medium: string;
+    Regular: string;
+    SemiBold: string;
+    Thin: string;
   };
   size: {
     xs: number;

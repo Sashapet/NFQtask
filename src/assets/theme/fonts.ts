@@ -1,13 +1,13 @@
 export const FONTS = {
   Poppins: {
-    PoppinsBold: 'Poppins-Bold',
-    PoppinsExtraBold: 'Poppins-ExtraBold',
-    PoppinsExtraLight: 'Poppins-ExtraLight',
-    PoppinsLight: 'Poppins-Light',
-    PoppinsMedium: 'Poppins-Medium',
-    PoppinsRegular: 'Poppins-Regular',
-    PoppinsSemiBold: 'Poppins-SemiBold',
-    PoppinsThin: 'Poppins-Thin',
+    Bold: 'Poppins-Bold',
+    ExtraBold: 'Poppins-ExtraBold',
+    ExtraLight: 'Poppins-ExtraLight',
+    Light: 'Poppins-Light',
+    Medium: 'Poppins-Medium',
+    Regular: 'Poppins-Regular',
+    SemiBold: 'Poppins-SemiBold',
+    Thin: 'Poppins-Thin',
   },
   size: {
     xs: 11,
