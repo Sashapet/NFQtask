@@ -1,25 +1,20 @@
+import Reactotron from 'reactotron-react-native';
 import sagaPlugin from 'reactotron-redux-saga';
 import { NativeModules } from 'react-native';
-import Reactotron, { networking } from 'reactotron-react-native';
 import { reactotronRedux } from 'reactotron-redux';
-import ReactotronFlipper from 'reactotron-react-native/dist/flipper';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export const initReactotron = () => {
-  const scriptURL: string = NativeModules.SourceCode.scriptURL;
+  const scriptURL = NativeModules.SourceCode.scriptURL || 'http://10.20.0.254';
   const scriptHostname = scriptURL.split('://')[1].split(':')[0];
 
   Reactotron.configure({
     host: scriptHostname,
-    createSocket: path => new ReactotronFlipper(path),
   })
-    .useReactNative()
+    .useReactNative({ errors: false })
     .use(reactotronRedux())
+    .setAsyncStorageHandler(AsyncStorage)
     .use(sagaPlugin({}))
-    .use(
-      networking({
-        ignoreUrls: /clients3.google.com/,
-      }),
-    )
     .connect()
     .clear();
 
