@@ -4,6 +4,10 @@ declare module 'styled-components/native' {
   export interface DefaultTheme {
     colors: AppColors;
     fonts: AppFonts;
+    spacing: {
+      xs: number;
+      s: number;
+    };
   }
 }
 
@@ -23,9 +27,6 @@ export interface AppFonts {
     Thin: string;
   };
   size: {
-    xs: number;
     s: number;
-    m: number;
-    l: number;
   };
 }

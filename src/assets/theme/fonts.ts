@@ -10,9 +10,6 @@ export const FONTS = {
     Thin: 'Poppins-Thin',
   },
   size: {
-    xs: 11,
-    s: 16,
-    m: 20,
-    l: 28,
+    s: 20,
   },
 };

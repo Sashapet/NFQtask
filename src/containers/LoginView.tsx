@@ -55,9 +55,9 @@ const InputWrapper = styled.View`
 const Input = styled.TextInput`
   height: ${scale(50)}px;
   border: 1px solid black;
-  font-size: ${scale(20)}px;
+  font-size: ${({ theme }) => scale(theme.fonts.size.s)}px;
   text-align: center;
-  margin-bottom: ${scale(30)}px;
+  margin-bottom: ${({ theme }) => scale(theme.spacing.s)}px;
 `;
 const Logo = styled.Image`
   width: ${scale(100)}px;
