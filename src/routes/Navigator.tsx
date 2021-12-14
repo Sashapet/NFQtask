@@ -14,8 +14,8 @@ const Navigator: React.FC = () => {
     <ThemeProvider theme={MyTheme}>
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen name={ROUTES.Login} component={LoginView} />
           <Stack.Screen name={ROUTES.Profile} component={ProfileView} />
+          <Stack.Screen name={ROUTES.Login} component={LoginView} />
         </Stack.Navigator>
       </NavigationContainer>
     </ThemeProvider>
