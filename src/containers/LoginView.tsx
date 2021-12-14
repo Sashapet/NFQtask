@@ -1,8 +1,9 @@
 import React from 'react';
 import { Formik } from 'formik';
 import styled from 'styled-components/native';
-import { DefaultButton } from '@components/.';
 import { scale } from '@utils/helpers/dimensions';
+import { DefaultButton } from '@components/.';
+import { COLORS } from '@assets/theme';
 
 export const LoginView: React.FC = () => (
   <Formik
@@ -10,9 +11,7 @@ export const LoginView: React.FC = () => (
       username: '',
       password: '',
     }}
-    onSubmit={values => {
-      console.tron.log(values);
-    }}
+    onSubmit={values => console.tron.log(values)}
   >
     {({ handleSubmit, values, handleChange }) => (
       <LoginWrapper>
@@ -22,13 +21,13 @@ export const LoginView: React.FC = () => (
         <InputWrapper>
           <Input
             placeholder={'Username'}
-            placeholderTextColor={'black'}
+            placeholderTextColor={COLORS.primary}
             value={values.username}
             onChangeText={handleChange('username')}
           />
           <Input
             placeholder={'Password'}
-            placeholderTextColor={'black'}
+            placeholderTextColor={COLORS.primary}
             value={values.password}
             onChangeText={handleChange('password')}
           />
@@ -54,10 +53,10 @@ const InputWrapper = styled.View`
 `;
 const Input = styled.TextInput`
   height: ${scale(50)}px;
-  border: 1px solid black;
-  font-size: ${scale(20)}px;
+  font-size: ${({ theme }) => scale(theme.fonts.size.s)}px;
   text-align: center;
-  margin-bottom: ${scale(30)}px;
+  border: 1px solid ${({ theme }) => theme.colors.primary};
+  margin-bottom: ${({ theme }) => scale(theme.spacing.s)}px;
 `;
 const Logo = styled.Image`
   width: ${scale(100)}px;
