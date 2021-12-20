@@ -1,5 +1,5 @@
-import { appActions } from './app/AppActions';
+import { authActions } from './auth/AuthActions';
 
 export const actions = {
-  app: appActions,
+  auth: authActions,
 };

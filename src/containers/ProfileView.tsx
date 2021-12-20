@@ -1,23 +1,49 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components/native';
+import { ActivityIndicator } from 'react-native';
 import { DefaultButton } from '@components/.';
 import { scale } from '@utils/helpers/dimensions';
+import { useDispatch, useSelector } from 'react-redux';
+import { actions, selectors } from '@state/.';
+import { COLORS } from '@assets/theme';
 
-export const ProfileView: React.FC = () => (
-  <ProfileWrapper>
-    <DefaultButton logOut onPress={() => console.tron.log('logOut')}>
-      Logout
-    </DefaultButton>
-    <LogoWrapper>
-      <Logo source={{ uri: 'https://placeimg.com/80/80/tech' }} />
-    </LogoWrapper>
-    <Description>
-      <Info>John Doe</Info>
-      <Info>Address line</Info>
-      <Info>+370 xxx xxxx</Info>
-    </Description>
-  </ProfileWrapper>
-);
+export const ProfileView: React.FC = () => {
+  const user = useSelector(selectors.auth.user);
+  const dispatch = useDispatch();
+  const handleLogOut = useCallback(() => {
+    dispatch(actions.auth.logOut());
+  }, []);
+  if (!user) {
+    return (
+      <SetOnSyncWrapper>
+        <ActivityIndicator size={'large'} color={COLORS.primary} />
+      </SetOnSyncWrapper>
+    );
+  }
+  const { image, firstName, lastName, address, phone } = user;
+  return (
+    <ProfileWrapper>
+      <DefaultButton logOut onPress={handleLogOut}>
+        Logout
+      </DefaultButton>
+      <LogoWrapper>
+        <Logo source={{ uri: image }} />
+      </LogoWrapper>
+      <Description>
+        <Info>
+          {firstName} {lastName}
+        </Info>
+        <Info>{address}</Info>
+        <Info>{phone}</Info>
+      </Description>
+    </ProfileWrapper>
+  );
+};
+const SetOnSyncWrapper = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
 const ProfileWrapper = styled.View`
   flex: 1;
 `;
