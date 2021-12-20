@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components/native';
+import styled from 'styled-components/native';
 import { ActivityIndicator } from 'react-native';
 import { scale } from '@utils/helpers/dimensions';
 import { useSelector } from 'react-redux';
@@ -20,7 +20,7 @@ export const DefaultButton: React.FC<DefaultButtonProps> = ({
   return (
     <TouchableWrapper disabled={setOnSync} logOut={logOut} onPress={onPress}>
       {setOnSync ? (
-        <ActivityIndicator size={'large'} color={COLORS.primary} />
+        <ActivityIndicator size={'large'} color={COLORS.black01} />
       ) : (
         <ButtonTitle logOut={logOut}>{children}</ButtonTitle>
       )}
@@ -33,19 +33,13 @@ const ButtonTitle = styled.Text<{ logOut: boolean }>`
   padding-horizontal: ${({ theme }) => scale(theme.spacing.xs)}px;
   font-size: ${({ theme }) => scale(theme.fonts.size.s)}px;
   text-align: ${({ logOut }) => (logOut ? 'right' : 'center')};
+  color: ${({ theme }) => theme.colors.white};
 `;
 
 const TouchableWrapper = styled.TouchableOpacity<{ logOut: boolean }>`
   width: 100%;
   height: ${scale(50)}px;
   justify-content: center;
-  ${({ logOut }) =>
-    logOut
-      ? css`
-          border-bottom-width: 1px;
-        `
-      : css`
-          border: 1px solid black;
-          border-radius: 6px;
-        `};
+  background-color: ${({ theme }) => theme.colors.secondary};
+  border-radius: ${({ logOut }) => (logOut ? 'null' : '6px')};
 `;

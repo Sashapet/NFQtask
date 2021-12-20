@@ -16,7 +16,7 @@ export const ProfileView: React.FC = () => {
   if (!user) {
     return (
       <SetOnSyncWrapper>
-        <ActivityIndicator size={'large'} color={COLORS.primary} />
+        <ActivityIndicator size={'large'} color={COLORS.white} />
       </SetOnSyncWrapper>
     );
   }
@@ -58,6 +58,7 @@ const Description = styled.View`
 const Info = styled.Text`
   font-size: ${({ theme }) => scale(theme.fonts.size.s)}px;
   padding-bottom: ${({ theme }) => scale(theme.spacing.s)}px;
+  color: ${({ theme }) => theme.colors.white};
 `;
 const Logo = styled.Image`
   width: 100%;

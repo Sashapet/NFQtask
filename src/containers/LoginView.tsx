@@ -37,14 +37,14 @@ export const LoginView: React.FC = () => {
             <Form>
               <Input
                 placeholder={'Username'}
-                placeholderTextColor={COLORS.primary}
+                placeholderTextColor={COLORS.white}
                 value={values.username}
                 onChangeText={handleChange('username')}
               />
               <Input
                 placeholder={'Password'}
                 secureTextEntry={true}
-                placeholderTextColor={COLORS.primary}
+                placeholderTextColor={COLORS.white}
                 value={values.password}
                 onChangeText={handleChange('password')}
               />
@@ -74,12 +74,14 @@ const LogoWrapper = styled.View`
   justify-content: center;
 `;
 const ButtonWrapper = styled.View``;
+
 const Input = styled.TextInput`
-  height: ${scale(50)}px;
+  border-bottom-color: ${({ theme }) => theme.colors.white};
+  border-bottom-width: 2px;
+  color: ${({ theme }) => theme.colors.white};
   font-size: ${({ theme }) => scale(theme.fonts.size.s)}px;
-  /* text-align: center; */
-  border: 1px solid ${({ theme }) => theme.colors.primary};
   margin-bottom: ${({ theme }) => scale(theme.spacing.s)}px;
+  padding-bottom: ${scale(5)}px;
 `;
 const Logo = styled.Image`
   width: ${scale(100)}px;

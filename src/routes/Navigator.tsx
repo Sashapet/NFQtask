@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { ThemeProvider } from 'styled-components/native';
 import { selectors } from '@state/.';
 import { useSelector } from 'react-redux';
+import { COLORS } from '@assets/theme';
 
 import { LoginView, ProfileView } from '../containers';
 import { MyTheme } from '../assets/theme/myTheme';
@@ -18,7 +19,14 @@ const Navigator: React.FC = () => {
   return (
     <ThemeProvider theme={MyTheme}>
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+            cardStyle: {
+              backgroundColor: COLORS.primary,
+            },
+          }}
+        >
           {isAuth ? (
             <Stack.Screen name={ROUTES.Profile} component={ProfileView} />
           ) : (
