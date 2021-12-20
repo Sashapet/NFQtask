@@ -1,4 +1,4 @@
-import { call, put, takeLeading } from 'redux-saga/effects';
+import { call, fork, put, take, takeLeading } from 'redux-saga/effects';
 import { actions, constants } from '@state/.';
 import { Api } from '@api/api';
 import { UserProps } from '@typings/userTypes';
@@ -10,12 +10,49 @@ function* handleLogin(data: {
   const { payload } = data;
   try {
     yield put(actions.auth.setOnSync(true));
-    const loginData: { token: string; refreshToken: string } = yield call(
-      Api.login,
-      payload,
-    );
-    const userData: UserProps = yield call(Api.fetchUser, loginData.token);
-    yield put(actions.auth.setUser(userData));
+    const token: string = yield call(Api.login, payload);
+    if (token) {
+      yield put(actions.auth.setAuth(true));
+    }
+  } catch (e) {
+    console.tron.log(e.message);
+    yield put(actions.auth.error(e.message));
+  } finally {
+    yield put(actions.auth.setOnSync(false));
+  }
+}
+
+export function* checkAuth() {
+  const token: string = yield call(Api.getToken);
+  if (token) {
+    yield put(actions.auth.setAuth(true));
+  } else {
+    yield put(actions.auth.setAuth(false));
+  }
+}
+
+export function* listenToAuthState() {
+  try {
+    while (true) {
+      const { payload } = yield take(constants.auth.SET_AUTH);
+      const isAuth = payload;
+      if (isAuth) {
+        const token: string = yield call(Api.getToken);
+        const user: UserProps = yield call(Api.fetchUser, token);
+        yield put(actions.auth.setUser(user));
+      }
+    }
+  } catch (e) {
+    console.tron.log(e.message);
+  }
+}
+
+function* handleLogOut() {
+  try {
+    yield put(actions.auth.setOnSync(true));
+    yield put(actions.auth.setUser(null));
+    yield call(Api.logOut);
+    yield put(actions.auth.setAuth(false));
   } catch (e) {
     console.tron.log(e.message);
     yield put(actions.auth.error(e.message));
@@ -25,5 +62,8 @@ function* handleLogin(data: {
 }
 
 export default function* authSaga() {
+  yield fork(checkAuth);
+  yield fork(listenToAuthState);
   yield takeLeading(constants.auth.LOGIN, handleLogin);
+  yield takeLeading(constants.auth.LOG_OUT, handleLogOut);
 }

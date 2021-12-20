@@ -23,40 +23,39 @@ export const LoginView: React.FC = () => {
       validationSchema={loginSchema}
       validateOnMount
     >
-      {({ handleSubmit, values, handleChange, errors }) => (
-        <LoginWrapper>
-          <LogoWrapper>
-            <Logo source={{ uri: 'https://placeimg.com/80/80/tech' }} />
-          </LogoWrapper>
-          <Form>
-            <Input
-              placeholder={'Username'}
-              placeholderTextColor={COLORS.primary}
-              value={values.username}
-              onChangeText={handleChange('username')}
-            />
-            <Input
-              placeholder={'Password'}
-              secureTextEntry={true}
-              placeholderTextColor={COLORS.primary}
-              value={values.password}
-              onChangeText={handleChange('password')}
-            />
-            <ButtonWrapper>
-              <DefaultButton
-                onPress={() => {
-                  setError(chooseErrorTitle(errors));
-                  Keyboard.dismiss();
-                  handleSubmit();
-                }}
-              >
-                Submit
-              </DefaultButton>
-              <Error error={error} />
-            </ButtonWrapper>
-          </Form>
-        </LoginWrapper>
-      )}
+      {({ handleSubmit, values, handleChange, errors }) => {
+        const submit = () => {
+          setError(chooseErrorTitle(errors));
+          Keyboard.dismiss();
+          handleSubmit();
+        };
+        return (
+          <LoginWrapper>
+            <LogoWrapper>
+              <Logo source={{ uri: 'https://placeimg.com/80/80/tech' }} />
+            </LogoWrapper>
+            <Form>
+              <Input
+                placeholder={'Username'}
+                placeholderTextColor={COLORS.primary}
+                value={values.username}
+                onChangeText={handleChange('username')}
+              />
+              <Input
+                placeholder={'Password'}
+                secureTextEntry={true}
+                placeholderTextColor={COLORS.primary}
+                value={values.password}
+                onChangeText={handleChange('password')}
+              />
+              <ButtonWrapper>
+                <DefaultButton onPress={submit}>Submit</DefaultButton>
+                <Error error={error} />
+              </ButtonWrapper>
+            </Form>
+          </LoginWrapper>
+        );
+      }}
     </Formik>
   );
 };
