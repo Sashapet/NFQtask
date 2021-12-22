@@ -7,6 +7,6 @@ export const MyTheme: DefaultTheme = {
   fonts: FONTS,
   spacing: {
     xs: 15,
-    s: 30,
+    s: 40,
   },
 };

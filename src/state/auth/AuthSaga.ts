@@ -9,14 +9,14 @@ function* handleLogin(data: {
 }) {
   const { payload } = data;
   try {
+    yield put(actions.auth.error(''));
     yield put(actions.auth.setOnSync(true));
     const token: string = yield call(Api.login, payload);
     if (token) {
       yield put(actions.auth.setAuth(true));
     }
   } catch (e) {
-    console.tron.log(e.message);
-    yield put(actions.auth.error(e.message));
+    yield put(actions.auth.error('User not found'));
   } finally {
     yield put(actions.auth.setOnSync(false));
   }
@@ -49,12 +49,12 @@ export function* listenToAuthState() {
 
 function* handleLogOut() {
   try {
+    yield put(actions.auth.error(''));
     yield put(actions.auth.setOnSync(true));
     yield put(actions.auth.setUser(null));
     yield call(Api.logOut);
     yield put(actions.auth.setAuth(false));
   } catch (e) {
-    console.tron.log(e.message);
     yield put(actions.auth.error(e.message));
   } finally {
     yield put(actions.auth.setOnSync(false));
