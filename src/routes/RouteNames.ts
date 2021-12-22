@@ -1,3 +1,4 @@
 export enum ROUTES {
-  Demo = 'demo',
+  Login = 'LoginScreen',
+  Profile = 'ProfileScreen',
 }

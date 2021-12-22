@@ -1,14 +1,13 @@
 import { AnyAction, CombinedState, combineReducers } from 'redux';
 
-import { appReducer, AppReducerState } from './app/AppReducer';
-// import { constants } from './constants';
+import { authReducer, AuthReducerState } from './auth/AuthReducer';
 
 export interface RootState {
-  app: AppReducerState;
+  auth: AuthReducerState;
 }
 
 const combinedReducer = combineReducers<CombinedState<RootState>>({
-  app: appReducer,
+  auth: authReducer,
 });
 
 const rootReducer = (state: RootState | undefined, action: AnyAction) =>
