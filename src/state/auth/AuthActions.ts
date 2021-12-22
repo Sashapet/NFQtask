@@ -10,6 +10,7 @@ const error = (payload: string) => ({
   type: constants.auth.ERROR,
   payload,
 });
+
 const setAuth = (payload: boolean) => ({
   type: constants.auth.SET_AUTH,
   payload,
